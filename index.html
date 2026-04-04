@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TJ's Barbers | Stoke-on-Trent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #c9a84c;
+      --gold-lt: #e5c97a;
+      --dark:    #0d0d0d;
+      --dark2:   #161616;
+      --dark3:   #1f1f1f;
+      --mid:     #2a2a2a;
+      --light:   #f0ece4;
+      --grey:    #9a9a9a;
+      --radius:  8px;
+      --nav-h:   70px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      z-index: 1000;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-book-btn {
+      background: var(--gold);
+      color: var(--dark) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--radius);
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-book-btn:hover { background: var(--gold-lt) !important; color: var(--dark) !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--light);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: var(--nav-h); left: 0; right: 0;
+        background: var(--dark2);
+        border-bottom: 1px solid rgba(201,168,76,0.2);
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 0;
+        gap: 1.2rem;
+        transform: translateY(-120%);
+        transition: transform 0.3s;
+      }
+      .nav-links.open { transform: translateY(0); }
+    }
+
+    /* ── Hero ── */
+    #home {
+      min-height: 100vh;
+      padding-top: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1200 50%, #0d0d0d 100%);
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          rgba(201,168,76,0.03) 0px,
+          rgba(201,168,76,0.03) 1px,
+          transparent 1px,
+          transparent 60px
+        );
+    }
+
+    .hero-content { position: relative; z-index: 1; padding: 2rem; }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: 0.9;
+      color: var(--light);
+    }
+
+    .hero-title span { color: var(--gold); }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--grey);
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-ctas {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--light);
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(240,236,228,0.3);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--grey);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--grey), transparent);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Section Commons ── */
+    section { padding: 6rem 5%; }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--grey);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── Services ── */
+    #services { background: var(--dark2); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      color: var(--light);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-desc {
+      font-size: 0.85rem;
+      color: var(--grey);
+      margin-bottom: 1rem;
+    }
+
+    .service-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+    }
+
+    /* ── Opening Hours ── */
+    #hours { background: var(--dark); }
+
+    .hours-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 700px) { .hours-layout { grid-template-columns: 1fr; gap: 2rem; } }
+
+    .hours-table { width: 100%; border-collapse: collapse; }
+
+    .hours-table tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+    .hours-table td {
+      padding: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+
+    .hours-table td:last-child {
+      text-align: right;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .hours-table .today td { color: var(--gold-lt); font-weight: 600; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(39,174,96,0.15);
+      color: #27ae60;
+      border: 1px solid rgba(39,174,96,0.3);
+      border-radius: 20px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #27ae60;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    .hours-highlight {
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .hours-highlight p {
+      font-size: 0.85rem;
+      color: var(--grey);
+      margin-top: 1rem;
+    }
+
+    /* ── Gallery ── */
+    #gallery { background: var(--dark2); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 200px);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 160px); }
+    }
+
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--grey);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(201,168,76,0.1);
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .gallery-item:hover { border-color: var(--gold); transform: scale(1.02); }
+
+    .gallery-item:first-child {
+      grid-row: span 2;
+      font-size: 0.85rem;
+    }
+
+    .gallery-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+
+    .gallery-placeholder .icon { font-size: 2rem; }
+
+    .gallery-note {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--grey);
+      text-align: center;
+    }
+
+    /* ── Booking ── */
+    #booking { background: var(--dark); }
+
+    .booking-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) { .booking-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .booking-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .booking-info-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .booking-info-text h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--light);
+      margin-bottom: 0.2rem;
+    }
+
+    .booking-info-text p {
+      font-size: 0.85rem;
+      color: var(--grey);
+    }
+
+    .booking-form {
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 16px;
+      padding: 2.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-group { margin-bottom: 1.2rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      color: var(--light);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .form-group select option { background: var(--mid); }
+
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .form-success h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); }
+    .form-success p { color: var(--grey); margin-top: 0.5rem; font-size: 0.9rem; }
+
+    /* ── Contact ── */
+    #contact { background: var(--dark2); }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    @media (max-width: 700px) { .contact-layout { grid-template-columns: 1fr; } }
+
+    .contact-card {
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 12px;
+      padding: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      transition: border-color 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .contact-card:hover { border-color: var(--gold); }
+
+    .contact-card-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .contact-card-text h4 {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-card-text p {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--light);
+    }
+
+    .map-container {
+      margin-top: 3rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.15);
+      height: 360px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: invert(90%) hue-rotate(180deg);
+    }
+
+    .contact-form-section {
+      margin-top: 3rem;
+    }
+
+    .contact-form-section h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 3rem 5% 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--grey);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(154,154,154,0.5);
+    }
+
+    /* ── AI Chat Widget ── */
+    #chat-widget {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .chat-window {
+      width: 360px;
+      max-height: 520px;
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      transform: scale(0.8) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .chat-window.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    @media (max-width: 420px) {
+      .chat-window {
+        width: calc(100vw - 2rem);
+        right: 1rem;
+        bottom: 5rem;
+      }
+      #chat-widget { right: 1rem; }
+    }
+
+    .chat-header {
+      background: var(--dark3);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .chat-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .chat-header-info h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--light);
+    }
+
+    .chat-header-info p {
+      font-size: 0.72rem;
+      color: #27ae60;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .chat-header-info p::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #27ae60;
+    }
+
+    .chat-close {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--grey);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0.2rem;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+
+    .chat-close:hover { color: var(--light); }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--mid) transparent;
+    }
+
+    .chat-msg {
+      max-width: 85%;
+      padding: 0.65rem 0.9rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .chat-msg.bot {
+      background: var(--mid);
+      border-radius: 4px 12px 12px 12px;
+      align-self: flex-start;
+      color: var(--light);
+    }
+
+    .chat-msg.user {
+      background: var(--gold);
+      color: var(--dark);
+      border-radius: 12px 12px 4px 12px;
+      align-self: flex-end;
+      font-weight: 500;
+    }
+
+    .chat-typing {
+      display: none;
+      align-self: flex-start;
+      background: var(--mid);
+      border-radius: 4px 12px 12px 12px;
+      padding: 0.65rem 0.9rem;
+      gap: 5px;
+    }
+
+    .chat-typing.show { display: flex; }
+
+    .chat-typing span {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--grey);
+      animation: typing 1.2s infinite;
+    }
+
+    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50%       { transform: translateY(-4px); opacity: 1; }
+    }
+
+    /* API key setup */
+    .chat-setup {
+      padding: 1rem;
+      background: rgba(201,168,76,0.08);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      display: none;
+    }
+
+    .chat-setup.show { display: block; }
+
+    .chat-setup p {
+      font-size: 0.75rem;
+      color: var(--grey);
+      margin-bottom: 0.5rem;
+    }
+
+    .chat-setup-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chat-setup input {
+      flex: 1;
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 0.4rem 0.6rem;
+      color: var(--light);
+      font-size: 0.75rem;
+      font-family: monospace;
+    }
+
+    .chat-setup input:focus { outline: 1px solid var(--gold); border-color: var(--gold); }
+
+    .chat-setup button {
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .chat-input-area {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      color: var(--light);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      resize: none;
+      max-height: 100px;
+    }
+
+    .chat-input:focus { outline: none; border-color: var(--gold); }
+
+    .chat-send {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: var(--gold);
+      border: none;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      align-self: flex-end;
+      transition: background 0.2s;
+    }
+
+    .chat-send:hover { background: var(--gold-lt); }
+
+    .chat-send:disabled { background: var(--mid); color: var(--grey); cursor: not-allowed; }
+
+    .chat-toggle {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: none;
+      color: var(--dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      position: relative;
+    }
+
+    .chat-toggle:hover { background: var(--gold-lt); transform: scale(1.05); }
+
+    .chat-badge {
+      position: absolute;
+      top: -2px; right: -2px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: #e74c3c;
+      border: 2px solid var(--dark2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    /* ── Utility ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav>
+  <div class="nav-logo">TJ's Barbers</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#booking" class="nav-book-btn">Book Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="home">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Est. Stoke-on-Trent</p>
+    <h1 class="hero-title">TJ's<br /><span>Barbers</span></h1>
+    <p class="hero-sub">Sharp cuts. Clean fades. Classic shaves. Walk in any time — Stoke-on-Trent's authentic old-school barbershop.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+      <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Services</button>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<section id="services">
+  <p class="section-label">What We Offer</p>
+  <h2 class="section-title">Services &amp; Prices</h2>
+  <p class="section-sub">Classic barbering at prices that won't break the bank. Known locally as one of the most affordable and friendly shops in Stoke.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✂️</div>
+      <div class="service-name">Haircut</div>
+      <div class="service-desc">Precision cut styled to your preference. Trusted by regulars for 15+ years.</div>
+      <div class="service-price">£10–£12</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🪒</div>
+      <div class="service-name">Beard Trim</div>
+      <div class="service-desc">Neat shape and line-up. Available as a standalone or add-on.</div>
+      <div class="service-price">Great value</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💈</div>
+      <div class="service-name">Cut &amp; Beard</div>
+      <div class="service-desc">Full haircut plus beard tidy — best value combo in the shop.</div>
+      <div class="service-price">Best value</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">👶</div>
+      <div class="service-name">Kids Cut</div>
+      <div class="service-desc">Patient and friendly service for all ages — families always welcome.</div>
+      <div class="service-price">Very affordable</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔥</div>
+      <div class="service-name">Skin Fade</div>
+      <div class="service-desc">Zero to length — seamless fade crafted with expert clippers.</div>
+      <div class="service-price">Competitively priced</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎩</div>
+      <div class="service-name">Classic Shave</div>
+      <div class="service-desc">Old-school straight razor shave. Pure barbershop tradition.</div>
+      <div class="service-price">Ask TJ</div>
+    </div>
+  </div>
+  <p style="font-size:0.78rem;color:var(--grey);margin-top:1.5rem;">* Prices confirmed on the day. TJ is known for being very affordable — just walk in and ask!</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ HOURS ═══════════════ -->
+<section id="hours">
+  <div class="hours-layout">
+    <div>
+      <p class="section-label">When We're Open</p>
+      <h2 class="section-title">Opening Hours</h2>
+      <p class="section-sub">Walk-ins are always welcome — no appointment needed. TJ has 15+ years of experience and is known for being fast, thorough, and great value.</p>
+      <div id="openStatus" class="status-badge">
+        <span class="status-dot"></span>
+        <span id="openText">Checking…</span>
+      </div>
+    </div>
+    <div class="hours-highlight">
+      <table class="hours-table" id="hoursTable">
+        <tr data-day="1"><td>Monday</td><td>8:00am – 7:00pm</td></tr>
+        <tr data-day="2"><td>Tuesday</td><td>8:00am – 7:00pm</td></tr>
+        <tr data-day="3"><td>Wednesday</td><td>8:00am – 7:00pm</td></tr>
+        <tr data-day="4"><td>Thursday</td><td>8:00am – 7:00pm</td></tr>
+        <tr data-day="5"><td>Friday</td><td>Closed</td></tr>
+        <tr data-day="6"><td>Saturday</td><td>8:00am – 7:00pm</td></tr>
+        <tr data-day="0"><td>Sunday</td><td>8:00am – 7:00pm</td></tr>
+      </table>
+      <p>&#128205; Stoke-on-Trent, ST4 2BJ</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ GALLERY ═══════════════ -->
+<section id="gallery">
+  <p class="section-label">Our Work</p>
+  <h2 class="section-title">Gallery</h2>
+  <p class="section-sub">A sample of what we do. Add your own photos to bring this to life.</p>
+
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <div class="icon">📸</div>
+        <span>Featured Photo</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder"><div class="icon">✂️</div><span>Cut 1</span></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder"><div class="icon">💈</div><span>Fade</span></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder"><div class="icon">🪒</div><span>Beard</span></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder"><div class="icon">✂️</div><span>Cut 2</span></div>
+    </div>
+  </div>
+  <p class="gallery-note">Replace the placeholders above with your own photos using &lt;img&gt; tags — or connect an Instagram feed.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ BOOKING ═══════════════ -->
+<section id="booking">
+  <div class="booking-layout">
+    <div>
+      <p class="section-label">Reserve Your Spot</p>
+      <h2 class="section-title">Book an Appointment</h2>
+      <p class="section-sub">TJ primarily operates on a walk-in basis — just turn up! If you want to check availability or have a question, give TJ a ring.</p>
+
+      <div class="booking-info-item">
+        <div class="booking-info-icon">🚶</div>
+        <div class="booking-info-text">
+          <h4>Walk-ins Welcome</h4>
+          <p>No appointment needed — just come in during opening hours</p>
+        </div>
+      </div>
+      <div class="booking-info-item">
+        <div class="booking-info-icon">📞</div>
+        <div class="booking-info-text">
+          <h4>Call or WhatsApp Ahead</h4>
+          <p><a href="tel:+447478050052">+44 7478 050052</a></p>
+        </div>
+      </div>
+      <div class="booking-info-item">
+        <div class="booking-info-icon">📍</div>
+        <div class="booking-info-text">
+          <h4>Address</h4>
+          <p>Stoke-on-Trent, ST4 2BJ</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="booking-form">
+      <div id="bookingFormWrap">
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;margin-bottom:1.5rem;color:var(--gold);">Send TJ a Message</h3>
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" name="fname" required placeholder="John" />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lname" placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone / WhatsApp *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="+44 7XXX XXXXXX" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="service">Service *</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Choose…</option>
+                <option>Haircut</option>
+                <option>Beard Trim</option>
+                <option>Cut &amp; Beard</option>
+                <option>Kids Cut</option>
+                <option>Skin Fade</option>
+                <option>Classic Shave</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bdate">Preferred Date *</label>
+              <input type="date" id="bdate" name="bdate" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="btime">Preferred Time *</label>
+            <select id="btime" name="btime" required>
+              <option value="" disabled selected>Choose…</option>
+              <option>8:00am</option><option>8:30am</option>
+              <option>9:00am</option><option>9:30am</option>
+              <option>10:00am</option><option>10:30am</option>
+              <option>11:00am</option><option>11:30am</option>
+              <option>12:00pm</option><option>12:30pm</option>
+              <option>1:00pm</option><option>1:30pm</option>
+              <option>2:00pm</option><option>2:30pm</option>
+              <option>3:00pm</option><option>3:30pm</option>
+              <option>4:00pm</option><option>4:30pm</option>
+              <option>5:00pm</option><option>5:30pm</option>
+              <option>6:00pm</option><option>6:30pm</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="notes">Extra Notes</label>
+            <textarea id="notes" name="notes" placeholder="Anything we should know? Style references, special requests…"></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Request Appointment</button>
+        </form>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">✅</div>
+        <h3>Message Sent!</h3>
+        <p>TJ will get back to you via WhatsApp shortly. Remember — walk-ins are always welcome too!</p>
+        <p style="margin-top:0.5rem;">Or just ring TJ directly: <strong><a href="tel:+447478050052">+44 7478 050052</a></strong></p>
+        <button class="btn-outline" style="margin-top:1.5rem;" onclick="resetForm()">Send Another</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact">
+  <p class="section-label">Get in Touch</p>
+  <h2 class="section-title">Contact Us</h2>
+  <p class="section-sub">Questions? Need to change a booking? Reach out — we're friendly.</p>
+
+  <div class="contact-layout">
+    <a href="tel:+447478050052" class="contact-card">
+      <div class="contact-card-icon">📞</div>
+      <div class="contact-card-text">
+        <h4>Call or WhatsApp</h4>
+        <p>+44 7478 050052</p>
+      </div>
+    </a>
+    <a href="https://wa.me/447478050052" target="_blank" rel="noopener" class="contact-card">
+      <div class="contact-card-icon">💬</div>
+      <div class="contact-card-text">
+        <h4>WhatsApp</h4>
+        <p>Message us directly</p>
+      </div>
+    </a>
+    <div class="contact-card" style="cursor:default;">
+      <div class="contact-card-icon">📍</div>
+      <div class="contact-card-text">
+        <h4>Find Us</h4>
+        <p>Stoke-on-Trent ST4 2BJ</p>
+      </div>
+    </div>
+    <div class="contact-card" style="cursor:default;">
+      <div class="contact-card-icon">🕐</div>
+      <div class="contact-card-text">
+        <h4>Hours Today</h4>
+        <p id="todayHours">Loading…</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <iframe
+      src="https://www.openstreetmap.org/export/embed.html?bbox=-2.197,52.996,-2.165,53.014&layer=mapnik&marker=53.005,-2.181"
+      allowfullscreen
+      loading="lazy"
+      title="TJ's Barbers Location – Stoke-on-Trent ST4 2BJ"
+    ></iframe>
+  </div>
+
+  <div class="contact-form-section">
+    <h3>Send Us a Message</h3>
+    <form id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cname">Name *</label>
+          <input type="text" id="cname" required placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label for="cphone">Phone / WhatsApp</label>
+          <input type="tel" id="cphone" placeholder="+44 7XXX XXXXXX" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cmsg">Message *</label>
+        <textarea id="cmsg" required placeholder="What would you like to ask?" style="min-height:120px;"></textarea>
+      </div>
+      <button type="submit" class="btn-primary">Send Message</button>
+    </form>
+    <p id="contactSuccess" style="display:none;margin-top:1rem;color:#27ae60;font-size:0.9rem;">
+      ✅ Message sent — we'll get back to you soon!
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-logo">TJ's Barbers</div>
+  <ul class="footer-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#booking">Book</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="footer-copy">
+    &copy; <span id="year"></span> TJ's Barbers, Stoke-on-Trent ST4 2BJ &bull; +44 7478 050052
+  </p>
+</footer>
+
+<!-- ═══════════════ AI CHAT WIDGET ═══════════════ -->
+<div id="chat-widget">
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar">💈</div>
+      <div class="chat-header-info">
+        <h4>TJ's Barbers Assistant</h4>
+        <p>Online now</p>
+      </div>
+      <button class="chat-close" onclick="toggleChat()" aria-label="Close">✕</button>
+    </div>
+
+    <!-- API key setup panel (hidden once key is saved) -->
+    <div class="chat-setup" id="chatSetup">
+      <p>&#128274; Enter your Anthropic API key to enable the AI assistant. Your key is stored only in your browser's localStorage and never sent anywhere except Anthropic's API directly.</p>
+      <div class="chat-setup-row">
+        <input type="password" id="apiKeyInput" placeholder="sk-ant-..." autocomplete="off" />
+        <button onclick="saveApiKey()">Save</button>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg bot">
+        👋 Hi! I'm TJ's Barbers virtual assistant. Ask me about services, prices, opening hours, or anything else — or just tap the button below to book!
+      </div>
+      <div class="chat-msg bot">
+        <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;"
+          onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'});toggleChat()">
+          📅 Book an Appointment
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-typing" id="chatTyping">
+      <span></span><span></span><span></span>
+    </div>
+
+    <div class="chat-input-area">
+      <textarea
+        class="chat-input"
+        id="chatInput"
+        rows="1"
+        placeholder="Ask anything…"
+        onkeydown="handleChatKey(event)"
+      ></textarea>
+      <button class="chat-send" id="chatSend" onclick="sendChat()" aria-label="Send">&#9658;</button>
+    </div>
+  </div>
+
+  <button class="chat-toggle" onclick="toggleChat()" aria-label="Chat with us">
+    💬
+    <span class="chat-badge" id="chatBadge">1</span>
+  </button>
+</div>
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+// ── Navbar ──
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+// ── Footer year ──
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ── Hours logic ──
+const HOURS = {
+  0: [8,0,19,0],
+  1: [8,0,19,0],
+  2: [8,0,19,0],
+  3: [8,0,19,0],
+  4: [8,0,19,0],
+  5: null,          // Friday — Closed
+  6: [8,0,19,0],
+};
+
+const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DAY_HOUR_TEXT = {
+  0: '8:00am – 7:00pm',
+  1: '8:00am – 7:00pm',
+  2: '8:00am – 7:00pm',
+  3: '8:00am – 7:00pm',
+  4: '8:00am – 7:00pm',
+  5: 'Closed today',
+  6: '8:00am – 7:00pm',
+};
+
+function initHours() {
+  const now = new Date();
+  const day = now.getDay();
+  const hm  = now.getHours() * 60 + now.getMinutes();
+
+  // Highlight today's row
+  const todayRow = document.querySelector(`[data-day="${day}"]`);
+  if (todayRow) todayRow.classList.add('today');
+
+  // Open/closed badge
+  const h = HOURS[day];
+  const badge    = document.getElementById('openStatus');
+  const openText = document.getElementById('openText');
+  if (h && hm >= h[0]*60+h[1] && hm < h[2]*60+h[3]) {
+    openText.textContent = 'Open Now';
+    badge.style.background = 'rgba(39,174,96,0.15)';
+    badge.style.color       = '#27ae60';
+    badge.style.borderColor = 'rgba(39,174,96,0.3)';
+  } else {
+    openText.textContent = 'Currently Closed';
+    badge.style.background = 'rgba(231,76,60,0.15)';
+    badge.style.color       = '#e74c3c';
+    badge.style.borderColor = 'rgba(231,76,60,0.3)';
+    badge.querySelector('.status-dot').style.background = '#e74c3c';
+    badge.querySelector('.status-dot').style.animation  = 'none';
+  }
+
+  // Today hours in contact panel
+  document.getElementById('todayHours').textContent = DAY_HOUR_TEXT[day];
+}
+
+initHours();
+
+// ── Booking form ──
+const bdate = document.getElementById('bdate');
+const today = new Date();
+bdate.min = today.toISOString().split('T')[0];
+
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const data = {
+    name:    document.getElementById('fname').value + ' ' + document.getElementById('lname').value,
+    phone:   document.getElementById('phone').value,
+    service: document.getElementById('service').value,
+    date:    document.getElementById('bdate').value,
+    time:    document.getElementById('btime').value,
+    notes:   document.getElementById('notes').value,
+  };
+
+  // Build a WhatsApp pre-fill link and open it (optional — comment out if undesired)
+  const msg = encodeURIComponent(
+    `Hi TJ's Barbers! I'd like to book:\n` +
+    `Name: ${data.name}\n` +
+    `Service: ${data.service}\n` +
+    `Date: ${data.date}\n` +
+    `Time: ${data.time}\n` +
+    (data.notes ? `Notes: ${data.notes}` : '')
+  );
+  window.open(`https://wa.me/447478050052?text=${msg}`, '_blank');
+
+  document.getElementById('bookingFormWrap').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+
+function resetForm() {
+  document.getElementById('bookingForm').reset();
+  document.getElementById('bookingFormWrap').style.display = 'block';
+  document.getElementById('formSuccess').style.display = 'none';
+}
+
+// ── Contact form ──
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('cname').value;
+  const msg  = document.getElementById('cmsg').value;
+  const waMsg = encodeURIComponent(`Hi! My name is ${name}.\n\n${msg}`);
+  window.open(`https://wa.me/447478050052?text=${waMsg}`, '_blank');
+  document.getElementById('contactSuccess').style.display = 'block';
+  this.reset();
+});
+
+// ── Chat widget ──
+let chatOpen = false;
+const chatWindow   = document.getElementById('chatWindow');
+const chatMessages = document.getElementById('chatMessages');
+const chatInput    = document.getElementById('chatInput');
+const chatSend     = document.getElementById('chatSend');
+const chatTyping   = document.getElementById('chatTyping');
+const chatBadge    = document.getElementById('chatBadge');
+const chatSetup    = document.getElementById('chatSetup');
+
+const SYSTEM_PROMPT = `You are the friendly virtual assistant for TJ's Barbers — an authentic, old-school barbershop in Stoke-on-Trent (ST4 2BJ).
+You help customers with questions about services, prices, opening hours, and location.
+
+Key facts:
+- Barber: TJ — lead barber and owner with 15+ years of experience. Known as friendly, fast, and thorough.
+- Phone / WhatsApp: +44 7478 050052
+- Address: Stoke-on-Trent, ST4 2BJ (Shelton area)
+- Hours: Mon–Thu 8am–7pm, Friday CLOSED, Sat–Sun 8am–7pm
+- Style: Classic "old school" authentic barbershop — welcoming to all ages including students and families with kids
+- Services: Haircuts (approx. £10–£12), Beard Trim, Cut & Beard combo, Kids Cut, Skin Fade, Classic Shave. Prices very affordable — exact prices confirmed by TJ on the day.
+- Walk-ins are the primary way to visit. No appointment needed. Customers can also WhatsApp ahead to check availability.
+
+Keep answers brief, warm, and helpful. Emphasise that walk-ins are welcome and TJ is very approachable. If someone wants to get in touch, direct them to call/WhatsApp +44 7478 050052.`;
+
+// Conversation history for context
+let chatHistory = [];
+
+function checkApiKey() {
+  const key = localStorage.getItem('tj_barbers_api_key');
+  if (key) {
+    chatSetup.classList.remove('show');
+    return key;
+  } else {
+    chatSetup.classList.add('show');
+    return null;
+  }
+}
+
+function saveApiKey() {
+  const val = document.getElementById('apiKeyInput').value.trim();
+  if (!val.startsWith('sk-ant-')) {
+    alert('Please enter a valid Anthropic API key (starts with sk-ant-)');
+    return;
+  }
+  localStorage.setItem('tj_barbers_api_key', val);
+  chatSetup.classList.remove('show');
+  document.getElementById('apiKeyInput').value = '';
+  appendMsg('bot', '✅ AI assistant ready! Ask me anything about TJ\'s Barbers.');
+}
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  chatWindow.classList.toggle('open', chatOpen);
+  chatBadge.style.display = 'none';
+  if (chatOpen) {
+    checkApiKey();
+    chatInput.focus();
+  }
+}
+
+function appendMsg(type, text) {
+  const div = document.createElement('div');
+  div.className = `chat-msg ${type}`;
+  div.textContent = text;
+  chatMessages.insertBefore(div, chatTyping);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  return div;
+}
+
+function handleChatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendChat();
+  }
+}
+
+async function sendChat() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+
+  const key = localStorage.getItem('tj_barbers_api_key');
+  if (!key) {
+    chatSetup.classList.add('show');
+    return;
+  }
+
+  appendMsg('user', text);
+  chatInput.value = '';
+  chatSend.disabled = true;
+  chatTyping.classList.add('show');
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  chatHistory.push({ role: 'user', content: text });
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 400,
+        system: SYSTEM_PROMPT,
+        messages: chatHistory,
+      }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || `API error ${res.status}`);
+    }
+
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Sorry, I didn\'t get a response. Please try again.';
+    chatHistory.push({ role: 'assistant', content: reply });
+    chatTyping.classList.remove('show');
+    appendMsg('bot', reply);
+
+  } catch (err) {
+    chatTyping.classList.remove('show');
+    if (err.message.includes('401') || err.message.includes('authentication')) {
+      localStorage.removeItem('tj_barbers_api_key');
+      appendMsg('bot', '❌ API key invalid. Please enter a valid key.');
+      chatSetup.classList.add('show');
+    } else {
+      appendMsg('bot', `⚠️ Something went wrong: ${err.message}`);
+    }
+  } finally {
+    chatSend.disabled = false;
+    chatInput.focus();
+  }
+}
+
+// Auto-resize chat textarea
+chatInput.addEventListener('input', () => {
+  chatInput.style.height = 'auto';
+  chatInput.style.height = Math.min(chatInput.scrollHeight, 100) + 'px';
+});
+
+// Show badge on load
+setTimeout(() => {
+  if (!chatOpen) chatBadge.style.display = 'flex';
+}, 2000);
+</script>
+</body>
+</html>
